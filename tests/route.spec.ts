@@ -8,7 +8,7 @@
  */
 
 import { test } from '@japa/runner'
-import { InferRouteParams } from '../src/route.js'
+import { InferRouteParams } from '../src/route.ts'
 
 test.group('Route types', () => {
   test('extract params from route identifier', ({ expectTypeOf }) => {

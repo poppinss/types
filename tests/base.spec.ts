@@ -21,7 +21,7 @@ import type {
   AbstractConstructor,
   NormalizeConstructor,
   DeepPartial,
-} from '../src/base.js'
+} from '../src/base.ts'
 
 test.group('Base types', () => {
   test('represent a constructor type', ({ expectTypeOf }) => {

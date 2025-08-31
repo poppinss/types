@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { Prettify } from './base.js'
+import { Prettify } from './base.ts'
 
 /**
  * Infers param segment from the route identifier.

@@ -7,5 +7,5 @@
  * file that was distributed with this source code.
  */
 
-export * from './src/base.js'
-export * from './src/route.js'
+export * from './src/base.ts'
+export * from './src/route.ts'
