@@ -20,6 +20,7 @@ import type {
   UnWrapLazyImport,
   AbstractConstructor,
   NormalizeConstructor,
+  DeepPartial,
 } from '../src/base.js'
 
 test.group('Base types', () => {
@@ -161,5 +162,53 @@ test.group('Base types', () => {
 
     class User1 extends DatesMixinFixed(Base) {}
     new User1()
+  })
+
+  test('mark properties deeply partial', ({ expectTypeOf }) => {
+    type Config = {
+      http: {
+        bodyParser: {
+          enabled: boolean
+          parsers: [
+            {
+              json: {
+                enabled: boolean
+              }
+            },
+          ]
+        }
+        qs: {
+          parse: {
+            quotes: boolean
+          }
+          stringify: {
+            arrayIndices: string
+          }
+        }
+      }
+    }
+
+    expectTypeOf<DeepPartial<Config>>().toEqualTypeOf<{
+      http?: {
+        bodyParser?: {
+          enabled?: boolean
+          parsers?: [
+            {
+              json?: {
+                enabled?: boolean
+              }
+            }?,
+          ]
+        }
+        qs?: {
+          parse?: {
+            quotes?: boolean
+          }
+          stringify?: {
+            arrayIndices?: string
+          }
+        }
+      }
+    }>()
   })
 })

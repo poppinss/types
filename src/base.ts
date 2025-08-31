@@ -116,3 +116,10 @@ export type ExtractDefined<T> = {
  * Returns a union of T or PromiseLike<T>
  */
 export type AsyncOrSync<T> = PromiseLike<T> | T
+
+/**
+ * Marks nested properties as partial
+ */
+export type DeepPartial<T> = Prettify<{
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
+}>

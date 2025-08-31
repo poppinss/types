@@ -36,7 +36,7 @@ InferRouteParams<'/posts/:category/*'> // { 'category': string; '*': string[] }
 
 ### `Prettify<T>`
 
-Prettifies the complex TypeScript types to a simplified type for better viewing experience. For example:
+Prettifies the complex TypeScript types to a simplified type for a better viewing experience. For example:
 
 ```ts
 import type { Prettify } from '@poppinss/types'
@@ -100,7 +100,7 @@ function serialize(
 
 ### `Constructor<T, Arguments>`
 
-Represent a class constructor. The `T` refers to the class instance properties and `Arguments` refers to the constructor arguments.
+Represent a class constructor. The `T` refers to the class instance properties, and `Arguments` refers to the constructor arguments.
 
 ```ts
 import type { Constructor } from '@poppinss/types'
@@ -112,7 +112,7 @@ function make<Args extends any[]>(Klass: Constructor<any, Args>, ...args: Args) 
 
 ### `AbstractConstructor<T, Arguments>`
 
-Represent a class constructor that could also be abstract. The `T` refers to the class instance properties and `Arguments` refers to the constructor arguments.
+Represent a class constructor that could also be abstract. The `T` refers to the class instance properties, and `Arguments` refers to the constructor arguments.
 
 ```ts
 import type { AbstractConstructor } from '@poppinss/types'
@@ -131,7 +131,7 @@ function middleware(list: LazyImport<Constructor<{ handle(): any }>>[]) {}
 
 ### `UnWrapLazyImport<Fn>`
 
-Unwrap the default export of a `LazyImport` function
+Unwrap the default export of a `LazyImport` function.
 
 ```ts
 import type { LazyImport, UnWrapLazyImport } from '@poppinss/types'
@@ -142,7 +142,7 @@ type MiddlewareClass = UnWrapLazyImport<Middleware>
 
 ### `NormalizeConstructor<T>`
 
-Normalizes the constructor arguments of a class to be used with mixins. The helper is created to work around [TypeScript issue#37142](https://github.com/microsoft/TypeScript/issues/37142).
+Normalizes the constructor arguments of a class for use with mixins. The helper is created to work around [TypeScript issue#37142](https://github.com/microsoft/TypeScript/issues/37142).
 
 **Usage without NormalizeConstructor**
 
@@ -267,7 +267,7 @@ AreAllOptional<{ id?: string; name?: string }> // true
 
 ### `ExtractUndefined<T>`
 
-Extract properties that are `undefined` or is a union with `undefined` values.
+Extract properties that are `undefined` or are a union with `undefined` values.
 
 ```ts
 import type { ExtractUndefined } from '@poppinss/types'
@@ -295,6 +295,29 @@ import type { AsyncOrSync } from '@poppinss/types'
 function log(fetcher: () => AsyncOrSync<{ id: number }>) {
   const { id } = await fetcher()
 }
+```
+
+### `DeepPartial<T>`
+
+Mark nested properties as partial until unlimited depth.
+
+```ts
+import type { DeepPartial } from '@poppinss/types'
+
+type Config = {
+  http: {
+    bodyParser: {
+      enabled: boolean
+    }
+    qs: {
+      parse: {
+        quotes: boolean
+      }
+    }
+  }
+}
+
+export function defineConfig(config: DeepPartial<Config>): Config {}
 ```
 
 ## Contributing
