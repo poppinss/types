@@ -10,14 +10,9 @@
 /*
  * Pretty print complex types
  */
-export type Prettify<T> = T extends Function
-  ? T
-  : Extract<
-      {
-        [Key in keyof T]: T[Key]
-      },
-      T
-    >
+export type Prettify<T> = {
+  [K in keyof T]: T[K]
+} & {}
 
 /**
  * Primitive values
